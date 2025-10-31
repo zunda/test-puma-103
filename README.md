@@ -1,4 +1,4 @@
-# Test PUma 103
+# Test Puma 103
 A minimal app to respond with 103 Early Hints
 
 ## Usage
