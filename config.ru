@@ -14,16 +14,20 @@ body{
 }
 _CSS
 
+EarlyHintsHeaders = {
+  "Link" => "</style.css>; rel=preload; as=style"
+}
+
 class Application
   def call(env)
     case env["PATH_INFO"]
     when "/"
+      env[Puma::Const::EARLY_HINTS]&.call(EarlyHintsHeaders)
       res = [
         200,
         {
           "Content-Type" => "text/html",
-          "Link" => "</style.css>; rel=preload; as=style"
-        },
+        }.merge(EarlyHintsHeaders),
         [ Page ]
       ]
     when "/style.css"
